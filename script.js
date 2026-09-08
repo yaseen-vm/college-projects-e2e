@@ -52,8 +52,20 @@ if (window.gsap && window.ScrollTrigger && !reduceMotion) {
     const distance = () => Math.max(0, track.scrollWidth - window.innerWidth);
     const scrollTween = gsap.to(track, { x: () => -distance(), ease: 'none', scrollTrigger: { trigger: section, start: 'top top', end: () => `+=${distance()}`, pin: true, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true } });
     gsap.utils.toArray('.process-panel').forEach((panel) => {
-      gsap.from(panel.querySelectorAll('h3, p, .panel-art'), { y: 40, opacity: 0, stagger: 0.08, ease: 'power2.out', scrollTrigger: { trigger: panel, containerAnimation: scrollTween, start: 'left 82%', end: 'left 43%', scrub: true } });
+      gsap.from(panel.querySelectorAll('h3, p'), { y: 40, opacity: 0, stagger: 0.08, ease: 'power2.out', scrollTrigger: { trigger: panel, containerAnimation: scrollTween, start: 'left 82%', end: 'left 43%', scrub: true } });
+      gsap.from(panel.querySelector('.panel-art'), { scale: 0.72, opacity: 0, ease: 'power2.out', scrollTrigger: { trigger: panel, containerAnimation: scrollTween, start: 'left 78%', end: 'left 48%', scrub: true } });
     });
+
+    const orbit = document.querySelector('.art-orbit');
+    if (orbit) {
+      gsap.to(orbit.querySelectorAll('i'), { rotation: 360, duration: 8, ease: 'none', repeat: -1, stagger: { each: 1.2, from: 'random' } });
+      gsap.to(orbit.querySelector('b'), { scale: 1.2, duration: 1.1, ease: 'sine.inOut', repeat: -1, yoyo: true });
+    }
+    gsap.utils.toArray('.art-grid i').forEach((shape, index) => {
+      gsap.to(shape, { y: index % 2 ? 16 : -16, rotation: index % 2 ? 14 : -14, duration: 1.35 + index * 0.15, ease: 'sine.inOut', repeat: -1, yoyo: true });
+    });
+    gsap.to('.art-code', { y: -12, rotation: -4, duration: 1.6, ease: 'sine.inOut', repeat: -1, yoyo: true });
+    gsap.to('.art-ticket', { y: -16, rotation: 7, duration: 1.8, ease: 'sine.inOut', repeat: -1, yoyo: true });
   }
 }
 
