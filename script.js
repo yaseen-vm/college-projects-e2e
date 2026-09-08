@@ -121,3 +121,46 @@ if(window.gsap && window.ScrollTrigger && !reduceMotion){
     });
   }
 }
+
+// EmailJS Contact Form Logic
+const contactForm = document.getElementById('contact-form');
+const submitBtn = document.getElementById('submit-btn');
+const formStatus = document.getElementById('form-status');
+
+if (contactForm) {
+  contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    submitBtn.textContent = 'SENDING...';
+    submitBtn.style.opacity = '0.5';
+    submitBtn.style.pointerEvents = 'none';
+    formStatus.style.display = 'none';
+
+    const templateParams = {
+      name: document.getElementById('user_name').value,
+      email: document.getElementById('user_email').value,
+      message: document.getElementById('user_message').value,
+      time: new Date().toLocaleString()
+    };
+
+    emailjs.send('service_iennfp7', 'template_9wuvbzo', templateParams, 'qRxH0WfmVW7wXW6HD')
+      .then(() => {
+        submitBtn.textContent = 'SENT SUCCESSFULLY ?';
+        submitBtn.style.opacity = '1';
+        contactForm.reset();
+        
+        setTimeout(() => {
+          submitBtn.textContent = 'SEND MESSAGE ?';
+          submitBtn.style.pointerEvents = 'auto';
+        }, 4000);
+      }, (error) => {
+        submitBtn.textContent = 'SEND MESSAGE ?';
+        submitBtn.style.opacity = '1';
+        submitBtn.style.pointerEvents = 'auto';
+        formStatus.textContent = 'Failed to send message. Please check your connection and try again.';
+        formStatus.style.display = 'block';
+        formStatus.style.color = '#F15A24';
+        console.error('EmailJS Error:', error);
+      });
+  });
+}

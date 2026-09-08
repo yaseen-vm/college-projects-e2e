@@ -76,12 +76,12 @@
       <p class="eyebrow">Contact</p>
       <div class="contact-main">
         <h2>HAVE AN IDEA?<br><em>LET'S BUILD IT.</em></h2>
-        <form action="https://formsubmit.co/naznanazna84@gmail.com" method="POST" class="contact-form">
-          <input type="email" name="email" placeholder="YOUR EMAIL" required>
-          <textarea name="message" placeholder="TELL US ABOUT YOUR PROJECT..." required></textarea>
-          <!-- Disable captcha for seamless experience -->
-          <input type="hidden" name="_captcha" value="false">
-          <button type="submit" class="magnetic">SEND MESSAGE ↗</button>
+        <form id="contact-form" class="contact-form">
+          <input type="text" id="user_name" placeholder="YOUR NAME" required>
+          <input type="email" id="user_email" placeholder="YOUR EMAIL" required>
+          <textarea id="user_message" placeholder="TELL US ABOUT YOUR PROJECT..." required></textarea>
+          <button type="submit" id="submit-btn" class="magnetic">SEND MESSAGE ↗</button>
+          <p id="form-status" style="display:none; font-family: var(--font-mono); font-size: 14px; margin-top: -20px;"></p>
         </form>
       </div>
     </section>
@@ -95,6 +95,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
